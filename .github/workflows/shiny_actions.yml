@@ -24,7 +24,8 @@ jobs:
     - name: Build and run Docker container
       run: |
         docker build -t test_deployment .
-        docker run -d -it -p 51795:51795 --cap-add SYS_TIME --name shiny-python-app-container test_deployment
+        docker create --name shiny-python-app-container test_deployment
+        docker cp shiny-python-app-container:/home/app ./app
 
     - name: Deploy to shinyapps.io
       env:
@@ -37,6 +38,5 @@ jobs:
 
     - name: Clean up
       run: |
-        rm -rf app
-        docker stop shiny-python-app-container
         docker rm shiny-python-app-container
+        rm -rf ./app
