@@ -13,6 +13,14 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
+    - name: Set up python 
+    - uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+        
+    - name: Install rsconnect-python
+      run: pip install rsconnect-python
+
     - name: Build and run Docker container
       run: |
         docker build -t test_deployment .
