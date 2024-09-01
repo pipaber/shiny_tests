@@ -2,3 +2,4 @@ shiny
 langchain_openai
 langchain_google_genai
 python-dotenv
+rsconnect-python
