@@ -19,6 +19,7 @@ COPY requirements.txt .
 # Install the required Python packages
 RUN pip install --no-cache-dir -r requirements.txt
 
+
 # Copy the application code to the working directory
 # COPY .env .
 COPY app.py .
