@@ -21,11 +21,6 @@ jobs:
     - name: Install rsconnect-python
       run: pip install rsconnect-python
 
-    - name: Build and run Docker container
-      run: |
-        docker build -t test_deployment .
-        docker run -d -it -p 51795:51795 --cap-add SYS_TIME --name shiny-python-app-container test_deployment
-
     - name: Deploy to shinyapps.io
       env:
         SHINYAPPS_TOKEN: ${{ secrets.SHINYAPPS_TOKEN }}
@@ -33,9 +28,4 @@ jobs:
         GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       run: |
         rsconnect add --account piero-palacios --name piero-palacios --token ${SHINYAPPS_TOKEN} --secret ${SHINYAPPS_SECRET}
-        rsconnect deploy shiny /home/app --name piero-palacios --title gemini_chatbot
-
-    - name: Clean up
-      run: |
-        docker rm shiny-python-app-container
-        rm -rf ./app
+        rsconnect deploy shiny /pipaber/shiny_tests --name piero-palacios --title gemini_chatbot
