@@ -13,7 +13,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Set up python 
+    - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: "3.11"
@@ -21,11 +21,16 @@ jobs:
     - name: Install rsconnect-python
       run: pip install rsconnect-python
 
-    - name: Deploy to shinyapps.io
+    - name: Add shinyapps.io account
       env:
         SHINYAPPS_TOKEN: ${{ secrets.SHINYAPPS_TOKEN }}
         SHINYAPPS_SECRET: ${{ secrets.SHINYAPPS_SECRET }}
+      run: |
+        rsconnect add --account piero-palacios --token ${SHINYAPPS_TOKEN} --secret ${SHINYAPPS_SECRET}
+
+    - name: Deploy to shinyapps.io
+      env:
         GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       run: |
-        rsconnect add --account piero-palacios --name piero-palacios --token ${SHINYAPPS_TOKEN} --secret ${SHINYAPPS_SECRET}
         rsconnect deploy shiny . --name piero-palacios --title gemini_chatbot
+
