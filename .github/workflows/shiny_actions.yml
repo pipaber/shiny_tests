@@ -28,4 +28,4 @@ jobs:
         GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       run: |
         rsconnect add --account piero-palacios --name piero-palacios --token ${SHINYAPPS_TOKEN} --secret ${SHINYAPPS_SECRET}
-        rsconnect deploy shiny /pipaber/shiny_tests --name piero-palacios --title gemini_chatbot
+        rsconnect deploy shiny . --name piero-palacios --title gemini_chatbot
