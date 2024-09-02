@@ -30,7 +30,7 @@ jobs:
 
     - name: Deploy to shinyapps.io
       env:
-        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        GOOGLE_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       run: |
         rsconnect deploy shiny . --name piero-palacios --title gemini_chatbot
 
